@@ -1,0 +1,6 @@
+-recherche par matériel
+-recherche par nom de fichiers
+
+
+Code improvements:
+-split en plusieurs fichiers

@@ -1,38 +1,65 @@
-.App {
+@import url('https://fonts.googleapis.com/css2?family=Courgette&display=swap');
+
+h1{
+  margin: 0%;
+  padding-top: 1vh;
   text-align: center;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+button{
+  font-family: 'Courgette', cursive;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.header{
+  z-index: 1;
+  position: fixed;
+  width: 100vw;
+  height: 12vh;
+  background-color: #000000;
+  font-family: 'Courgette', cursive;
+  color: #E1E1E1;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.menu{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  padding-top: 1vh;
+  font-size: 20px;
+}
+
+.appWrapper {
+  position: relative;
+  text-align: center;
+  border-color: black ;
+  border-style: solid;
+  border-width: 10px;
+  height: 90vh;
+  width: 80vw;
+  left: 20vw;
+  background-color: lightgrey;
+}
+
+.searchDiv{
+  background-color: #E1E1E1;
+  height: 100vh;
+  width: 20vw;
+  border-color: #c30000;
+  border-right: 2px solid black;
+}
+
+.displayDiv{
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
 }
 
-.App-link {
-  color: #61dafb;
+.displayList{
+  width: 20vw;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.searchAndDisplay{
+  display: flex;
+  flex-direction: row;
+  padding-top: 12vh;
+  background-color: #E1E1E1;
 }

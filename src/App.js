@@ -218,7 +218,7 @@ class App extends React.Component {
           <div className="menu">
             <p onClick={this.displayHome}>Acceuil</p>
             <p onClick={this.displayBrowse}>Parcourir les partitions</p>
-            <a href="https://fr.wikipedia.org/wiki/Pierre_Angot" target="_blank" id="wiki">Wikipedia</a>
+            <a href="https://fr.wikipedia.org/wiki/Pierre_Angot" rel="noreferrer" target="_blank" id="wiki">Wikipedia</a>
             <p onClick={this.displayPrice}>Tarifs et droits d'utilisation</p>
           </div>
         </div>}

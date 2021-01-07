@@ -1,5 +1,23 @@
 @import url('https://fonts.googleapis.com/css2?family=Courgette&display=swap');
 
+.homeDiv, .priceDiv{
+  background-image: url('./sitebackground.png');
+  background-size: 100% 100%;
+  height: 100vh;
+  width: 100vw;
+  opacity: 0.2;
+} 
+
+a{
+  color: #000000;
+  text-decoration: none;
+}
+
+#wiki{
+  color: #E1E1E1;
+  padding-top: 2.2vh;
+}
+
 h1{
   margin: 0%;
   padding-top: 1vh;
@@ -8,6 +26,7 @@ h1{
 
 button{
   font-family: 'Courgette', cursive;
+  color: #000000;
 }
 
 .header{
@@ -40,9 +59,27 @@ button{
   background-color: lightgrey;
 }
 
+.navigationButtons{
+  display: flex;
+  flex-direction: column;
+  position: fixed;
+  top: 12vh;
+  left: 92vw;
+  width: 7.2vw;
+  height: 1900px;
+  z-index: 1;
+  border-left: 2px solid black;
+  border-right: 2px solid black;
+  background-color: #E1E1E1;
+}
+
+.navigationButtons > button{
+  height: 10vh;
+}
+
 .searchDiv{
   background-color: #E1E1E1;
-  height: 100vh;
+  height: 1900px;
   width: 20vw;
   border-color: #c30000;
   border-right: 2px solid black;

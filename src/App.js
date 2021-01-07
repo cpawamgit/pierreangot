@@ -39,25 +39,27 @@ function PdfDisplayer(props) {
           height={800}
           style={{ margin: 0, padding: 0 }}
           scale={props.scale}
+          renderMode="svg"
+          rotate={props.rotate}
         />
       </Document>
-      <div>
+      <div className="navigationButtons">
         <p>
-          Page {pageNumber || (numPages ? 1 : '--')} of {numPages || '--'}
+          Page {pageNumber || (numPages ? 1 : '--')} sur {numPages || '--'}
         </p>
         <button
           type="button"
           disabled={pageNumber <= 1}
           onClick={previousPage}
         >
-          Previous
+          Précédent
         </button>
         <button
           type="button"
           disabled={pageNumber >= numPages}
           onClick={nextPage}
         >
-          Next
+          Suivant
         </button>
         <button onClick={() => { props.changeScale(0.2) }}>
           Agrandir
@@ -65,6 +67,7 @@ function PdfDisplayer(props) {
         <button onClick={() => { props.changeScale(-0.2) }}>
           Réduire
         </button>
+        <button onClick={() => { props.changeRotation() }}>Rotation</button>
         <button>
           <a download={toDisplay} href={toDisplay}>Télécharger</a>
         </button>
@@ -82,9 +85,11 @@ class App extends React.Component {
       fileName: '',
       actualObject: [],
       scale: 1,
-      displayHome: false,
-      displayBrowse: true,
-      displayPrice: false
+      displayHome: true,
+      displayBrowse: false,
+      displayPrice: false,
+      loading: false,
+      rotation: 0,
     }
     this.baseButtonHandleClick = this.baseButtonHandleClick.bind(this);
     this.displayListHandleClick = this.displayListHandleClick.bind(this);
@@ -93,12 +98,32 @@ class App extends React.Component {
     this.displayBrowse = this.displayBrowse.bind(this);
     this.displayHome = this.displayHome.bind(this);
     this.displayPrice = this.displayPrice.bind(this);
+    this.rotate = this.rotate.bind(this);
+    this.endLoading = this.endLoading.bind(this);
+  }
+
+  scrollToTop() {
+    window.scrollTo({
+      top: 0,
+    });
   }
 
   changeScale(value) {
     this.setState({
       scale: this.state.scale + value
     });
+  }
+
+  rotate() {
+    if (this.state.rotation === 270)
+      this.setState({
+        rotation: 0
+      });
+    else {
+      this.setState({
+        rotation: this.state.rotation + 90
+      });
+    }
   }
 
   baseButtonHandleClick() {
@@ -117,9 +142,18 @@ class App extends React.Component {
     }
     else {
       this.setState({
-        fileName: `${this.state.fullPath}${name}`
+        fileName: `${this.state.fullPath}${name}`,
+        loading: true
       });
+      setTimeout(this.endLoading, 2000)
     }
+    this.scrollToTop();
+  }
+
+  endLoading() {
+    this.setState({
+      loading: false
+    })
   }
 
   reinitState() {
@@ -132,7 +166,7 @@ class App extends React.Component {
     });
   }
 
-  displayHome(){
+  displayHome() {
     this.setState({
       displayHome: true,
       displayBrowse: false,
@@ -141,7 +175,7 @@ class App extends React.Component {
     });
   }
 
-  displayBrowse(){
+  displayBrowse() {
     this.setState({
       displayHome: false,
       displayBrowse: true,
@@ -150,7 +184,7 @@ class App extends React.Component {
     });
   }
 
-  displayPrice(){
+  displayPrice() {
     this.setState({
       displayHome: false,
       displayBrowse: false,
@@ -160,16 +194,23 @@ class App extends React.Component {
   }
 
   render() {
+    const pathStyle = this.state.loading ? { color: "red" } : null;
     const baseButton = <button onClick={this.baseButtonHandleClick}>Parcourir</button>
     const reinitButton = <button onClick={this.reinitState}>Réinitialiser</button>
     const displayList = this.state.actualObject.map((item, index) => {
       return (
-        <button onClick={() => { this.displayListHandleClick(item.name, item.type, index) }} className="displayList" index={index} key={item.name} typeofbutton={item.type}>{item.name}</button>
+        <button onClick={() => { this.displayListHandleClick(item.name, item.type, index) }}
+          className="displayList"
+          index={index} key={item.name}
+          typeofbutton={item.type}
+        >
+          {item.name}
+        </button>
       );
     });
     //todelete after test
-    displayList.unshift(<button>{this.state.fullPath}</button>)
-    const displayDiv = <div className="displayDiv">{displayList}</div>
+    displayList.unshift(<button style={pathStyle}>{this.state.fullPath}{this.state.loading && "...Chargement du document"}</button>)
+    const displayDiv = <div className="displayDiv">{reinitButton}{displayList}</div>
     return (
       <div>
         {<div className="header">
@@ -177,13 +218,13 @@ class App extends React.Component {
           <div className="menu">
             <p onClick={this.displayHome}>Acceuil</p>
             <p onClick={this.displayBrowse}>Parcourir les partitions</p>
-            <p>Wikipedia</p>
+            <a href="https://fr.wikipedia.org/wiki/Pierre_Angot" target="_blank" id="wiki">Wikipedia</a>
             <p onClick={this.displayPrice}>Tarifs et droits d'utilisation</p>
           </div>
         </div>}
         {this.state.displayBrowse && <div className="searchAndDisplay">
           <div className="searchDiv">
-            {this.state.baseButton ? baseButton : reinitButton}
+            {this.state.baseButton ? baseButton : null}
             {!this.state.baseButton && displayDiv}
           </div>
           <PdfDisplayer
@@ -191,8 +232,19 @@ class App extends React.Component {
             name={this.state.fileName}
             scale={this.state.scale}
             changeScale={this.changeScale}
+            rotate={this.state.rotation}
+            changeRotation={this.rotate}
           />
         </div>}
+        {this.state.displayHome &&
+          <div className="homeDiv">
+          </div>
+        }
+        {this.state.displayPrice &&
+          <div className="priceDiv">
+          </div>
+        }
+
       </div>
     );
   }

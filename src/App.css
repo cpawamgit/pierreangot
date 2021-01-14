@@ -1,12 +1,78 @@
 @import url('https://fonts.googleapis.com/css2?family=Courgette&display=swap');
 
-.homeDiv, .priceDiv{
+ul{
+  list-style-type: none;
+}
+
+.popUpDiv{
+  position: absolute;
+  text-align: center;
+  top: 20vh;
+  z-index: 35;
+  background-color: rgb(192, 45, 45);
+  width: 20vw;
+}
+
+.popUpDiv > p, button{
+  margin: 0;
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+.homeDiv{
   background-image: url('./sitebackground.png');
   background-size: 100% 100%;
-  height: 100vh;
-  width: 100vw;
-  opacity: 0.2;
+  height: 110vh;
+  width: 98vw;
+  opacity: 0.1;
 } 
+
+.priceDiv{
+  background-image: url('./sitebackground.png');
+  background-size: 100% 100%;
+  height: 250vh;
+  width: 98vw;
+  opacity: 0.1;
+} 
+
+.homeTextWrapper{
+  color: #000000;
+  opacity: 1;
+  background-color: transparent;
+  position: absolute;
+  top: 20vh;
+  width: 80vw;
+  left: 10vw;
+  bottom: 40vh;
+  z-index: 1;
+  font-family: 'Courgette', cursive;
+}
+
+.priceDivWrapper{
+  text-align: center;
+  color: #000000;
+  opacity: 1;
+  background-color: transparent;
+  position: absolute;
+  top: 20vh;
+  width: 80vw;
+  left: 10vw;
+  bottom: 40vh;
+  z-index: 1;
+  font-family: 'Courgette', cursive;
+  font-size: 20px;
+}
+
+.homeTextWrapper > p {
+  font-size: 25px;
+}
+
+img{
+  max-width: 100%;
+  height: auto;  
+  position: relative;
+  left: 35vw;
+}
 
 a{
   color: #000000;
@@ -15,7 +81,7 @@ a{
 
 #wiki{
   color: #E1E1E1;
-  padding-top: 2.2vh;
+  /*padding-top: 2.2vh;*/
 }
 
 h1{
@@ -24,13 +90,23 @@ h1{
   text-align: center;
 }
 
+h2{
+  text-align: center;
+  font-size: 28px;
+}
+
 button{
   font-family: 'Courgette', cursive;
   color: #000000;
+  border-radius: 8px;
+  height: 32px;
+  background-color: #E1E1E1;
+  border-color: #000000;
+  border-width: 1px;
 }
 
 .header{
-  z-index: 1;
+  z-index: 2;
   position: fixed;
   width: 100vw;
   height: 12vh;
@@ -44,7 +120,19 @@ button{
   flex-direction: row;
   justify-content: space-around;
   padding-top: 1vh;
+  height: 6vh;
   font-size: 20px;
+  margin: 0;
+}
+
+.menu > p, a{
+  padding-top: 1vh;
+  margin: 0;
+}
+
+.menu > p:hover, a:hover{
+  scale: 1.2;
+  cursor: pointer;
 }
 
 .appWrapper {
@@ -71,10 +159,19 @@ button{
   border-left: 2px solid black;
   border-right: 2px solid black;
   background-color: #E1E1E1;
+  font-size: 20px;
 }
 
 .navigationButtons > button{
   height: 10vh;
+  font-size: 20px;
+}
+
+.searchAndDisplay{
+  display: flex;
+  flex-direction: row;
+  padding-top: 12vh;
+  background-color: #E1E1E1;
 }
 
 .searchDiv{
@@ -94,9 +191,27 @@ button{
   width: 20vw;
 }
 
-.searchAndDisplay{
-  display: flex;
-  flex-direction: row;
-  padding-top: 12vh;
-  background-color: #E1E1E1;
+@media (max-width: 600px){
+  img{
+    left: 15vw;
+  }
+  .menu{
+    font-size: 10px;
+  }
+  .header > h1{
+    font-size: 18px;
+  }
+  .searchDiv{
+    width: 25vw;
+    background-color: #c30000;
+  }
+  .displayDiv > button{
+    height: 50px;
+    width: auto;
+    word-wrap: break-word
+    /*
+    test under
+    */
+
+  }
 }

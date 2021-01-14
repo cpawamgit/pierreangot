@@ -1,7 +1,28 @@
--boutton retour à coder (sauvegarder le state)
+bug
+-regler le bug du fichier qui reste sur l'affichage d'une page definie quand on le 
+en consulte un autre et qu'on reviens
+feature
 -recherche par matériel
 -recherche par nom de fichiers
+-téléchargement par dossier
+
+
 
 
 Code improvements:
 -split en plusieurs fichiers
+
+!!!!!!!!!!!!!!! Warnings to check:
+
+Warning: Can't perform a React state update on an unmounted component. This is a no-op, but it indicates a memory leak in your application. To fix, cancel all subscriptions and asynchronous tasks in the componentWillUnmount method.
+PageInternal@http://localhost:3000/static/js/0.chunk.js:52513:94
+Page index.js:1
+    e index.js:1
+    React 6
+    _callee$ Page.js:107
+    Babel 10
+    React 6
+    unstable_runWithPriority scheduler.development.js:646
+    React 4
+    unstable_runWithPriority scheduler.development.js:646
+    React 6

@@ -1,18 +1,20 @@
 bug
 -regler le bug du fichier qui reste sur l'affichage d'une page definie quand on le 
 en consulte un autre et qu'on reviens
+--------------------------------------------------------------------------------------
+
 feature
+-ajouter un logo d'onglet
 -recherche par matériel
 -recherche par nom de fichiers
 -téléchargement par dossier
-
-
-
+--------------------------------------------------------------------------------------
 
 Code improvements:
 -split en plusieurs fichiers
+--------------------------------------------------------------------------------------
 
-!!!!!!!!!!!!!!! Warnings to check:
+Warnings to check:
 
 Warning: Can't perform a React state update on an unmounted component. This is a no-op, but it indicates a memory leak in your application. To fix, cancel all subscriptions and asynchronous tasks in the componentWillUnmount method.
 PageInternal@http://localhost:3000/static/js/0.chunk.js:52513:94

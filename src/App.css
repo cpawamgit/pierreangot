@@ -4,6 +4,11 @@ ul{
   list-style-type: none;
 }
 
+body{
+  margin: 0%;
+  padding: 0%;
+}
+
 .popUpDiv{
   position: absolute;
   text-align: center;
@@ -74,6 +79,12 @@ img{
   left: 35vw;
 }
 
+@media (max-width: 600px){
+  img{
+    left: 15vw;
+  }
+}
+
 a{
   color: #000000;
   text-decoration: none;
@@ -128,6 +139,15 @@ button{
 .menu > p, a{
   padding-top: 1vh;
   margin: 0;
+}
+
+@media (max-width: 600px){
+  .menu{
+    font-size: 10px;
+  }
+  h1{
+    font-size: 15px;
+  }
 }
 
 .menu > p:hover, a:hover{
@@ -191,7 +211,75 @@ button{
   width: 20vw;
 }
 
+.searchAndDisplayPhone{
+  margin: 0%;
+  padding: 0%;
+  height: 100vh;
+  width: 100vw;
+  background-color: blue;
+  
+}
+
+.popUpDivPhone{
+  margin: 0%;
+  padding: 0%;
+  height: 40vh;
+  width: 80vw;
+  left: 10vw;
+  top: 25vw;
+  position: fixed;
+  background-color: rgb(255, 98, 98);
+  border: solid black 2px;
+}
+
+.popUpDivPhone > p{
+  margin-left: 5vw;
+  margin-right: 5vw;
+}
+
+.popUpDivPhone > button{
+  position: relative;
+  left: 35vw;
+  top: 3vh;
+  background-color: red;
+  border: solid black 2px;
+}
+
+.searchDivPhone{
+  margin: 0%;
+  padding: 0%;
+}
+
+.appWrapperPhone{
+  margin: 0%;
+  padding: 0%;
+  
+}
+
+.displayDivPhone{
+  margin: 0%;
+  padding: 0%;
+  
+}
+
+.navigationButtonsPhone{
+  margin: 0%;
+  padding: 0%;
+  
+}
+
+.displayListPhone{
+  margin: 0%;
+  padding: 0%;
+  
+}
+
+
+/*
 @media (max-width: 600px){
+  .header{
+    z-index: -1;
+  }
   img{
     left: 15vw;
   }
@@ -201,6 +289,18 @@ button{
   .header > h1{
     font-size: 18px;
   }
+
+  .appWrapper{
+    position: fixed;
+    background-color: blueviolet;
+    z-index: 15;
+  }
+  .searchAndDisplay{
+    display: block;
+    position: fixed;
+    top: 0vh;
+    padding-top: 0%;
+  }
   .searchDiv{
     width: 25vw;
     background-color: #c30000;
@@ -209,9 +309,14 @@ button{
     height: 50px;
     width: auto;
     word-wrap: break-word
-    /*
-    test under
-    */
+    
 
   }
-}
+  .navigationButtons{
+    position: fixed;
+    left: 50vw;
+    top: 0%;
+    width: 35vw;
+    background-color: aqua;
+  }
+}*/

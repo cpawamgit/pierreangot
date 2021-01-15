@@ -6,13 +6,28 @@ import { pdfjs } from 'react-pdf';
 //import { act } from 'react-dom/test-utils';
 pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.js`;
 
-console.log(navigator.userAgent)
+const isSmatphone = detectMob();
+
+function detectMob() {
+  const toMatch = [
+      /Android/i,
+      /webOS/i,
+      /iPhone/i,
+      /iPad/i,
+      /iPod/i,
+      /BlackBerry/i,
+      /Windows Phone/i
+  ];
+
+  return toMatch.some((toMatchItem) => {
+      return navigator.userAgent.match(toMatchItem);
+  });
+}
 
 function PopUp(props) {
   return (
-    <div className="popUpDiv">
-      <p>Certains documents sont très lourds et peuvent mettre du temps à charger.</p>
-      <p>Cliquer sur parcourir pour parcourir les partitions</p>
+    <div className={isSmatphone ? "popUpDivPhone" : "popUpDiv"}>
+      <p>Certains documents sont très lourds et peuvent mettre du temps à charger.</p>      
       <p>Veuillez noter que les documents contiennent des pages blanches pour le tirage</p>
       <p>Cliquer sur ok pour faire disparaitre ce message</p>
       <button onClick={props.hidePopUp}>
@@ -44,6 +59,39 @@ function PdfDisplayer(props) {
   }
 
   const toDisplay = `${process.env.PUBLIC_URL}${props.name}`;
+  const buttons = <div className={isSmatphone ? "navigationButtonsPhone" : "navigationButtons"}>
+  <p>
+    Page {pageNumber || (numPages ? 1 : '--')} sur {numPages || '--'}
+  </p>
+  <button
+    type="button"
+    disabled={pageNumber <= 1}
+    onClick={previousPage}
+  >
+    {isSmatphone ? null : "Précédent"}
+  </button>
+  <button
+    type="button"
+    disabled={pageNumber >= numPages}
+    onClick={nextPage}
+  >
+    {isSmatphone ? null : "Suivant"}          
+  </button>
+  <button onClick={() => { props.changeScale(0.2) }}>
+    {isSmatphone ? null : "Agrandir"}     
+  </button>
+  <button onClick={() => { props.changeScale(-0.2) }}>
+    {isSmatphone ? null : "Rétrécir"}    
+  </button>
+  <button onClick={() => { props.changeRotation() }}>
+  {isSmatphone ? null : "Rotation"}  
+  </button>
+  <button>
+    <a download={toDisplay} href={toDisplay}>
+    {isSmatphone ? null : "Télécharger"}
+    </a>
+  </button>
+</div>
   return (
     <div>
       <Document
@@ -61,35 +109,7 @@ function PdfDisplayer(props) {
           error=""
         />
       </Document>
-      <div className="navigationButtons">
-        <p>
-          Page {pageNumber || (numPages ? 1 : '--')} sur {numPages || '--'}
-        </p>
-        <button
-          type="button"
-          disabled={pageNumber <= 1}
-          onClick={previousPage}
-        >
-          Précédent
-        </button>
-        <button
-          type="button"
-          disabled={pageNumber >= numPages}
-          onClick={nextPage}
-        >
-          Suivant
-        </button>
-        <button onClick={() => { props.changeScale(0.2) }}>
-          Agrandir
-        </button>
-        <button onClick={() => { props.changeScale(-0.2) }}>
-          Réduire
-        </button>
-        <button onClick={() => { props.changeRotation() }}>Rotation</button>
-        <button>
-          <a download={toDisplay} href={toDisplay}>Télécharger</a>
-        </button>
-      </div>
+      {isSmatphone ? props.displaySearchMenu ? null : buttons : buttons}
     </div>
   );
 }
@@ -101,8 +121,8 @@ class App extends React.Component {
       baseButton: true,
       fullPath: '/sitePdfs/', //building after clicking each new button, i have to implement a return button two
       fileName: '',
-      actualObject: [],
-      scale: 1,
+      actualObject: [...files[0].contents],
+      scale: isSmatphone ? 0.6 : 1,
       displayHome: true,
       displayBrowse: false,
       displayPrice: false,
@@ -110,8 +130,8 @@ class App extends React.Component {
       rotation: 0,
       popUp: false,
       blockPopUp: false,
+      displaySearchMenu: true,
     }
-    this.baseButtonHandleClick = this.baseButtonHandleClick.bind(this);
     this.displayListHandleClick = this.displayListHandleClick.bind(this);
     this.reinitState = this.reinitState.bind(this);
     this.changeScale = this.changeScale.bind(this);
@@ -122,6 +142,13 @@ class App extends React.Component {
     this.endLoading = this.endLoading.bind(this);
     this.returnFunc = this.returnFunc.bind(this);
     this.hidePopUp = this.hidePopUp.bind(this);
+    this.toggleMenu = this.toggleMenu.bind(this);
+  }
+
+  toggleMenu(){
+    this.setState({
+      displaySearchMenu: !this.state.displaySearchMenu
+    })
   }
 
   scrollToTop() {
@@ -146,13 +173,6 @@ class App extends React.Component {
         rotation: this.state.rotation + 90
       });
     }
-  }
-
-  baseButtonHandleClick() {
-    this.setState({
-      baseButton: false,
-      actualObject: [...files[0].contents]
-    });
   }
 
   returnFunc() {
@@ -189,7 +209,7 @@ class App extends React.Component {
         fileName: `${this.state.fullPath}${name}`,
         loading: true
       });
-      setTimeout(this.endLoading, 4000)
+      setTimeout(this.endLoading, 3000)
     }
     this.scrollToTop();
   }
@@ -203,6 +223,9 @@ class App extends React.Component {
   }
 
   endLoading() {
+    if (isSmatphone){
+      this.toggleMenu();
+    }
     this.setState({
       loading: false
     })
@@ -248,53 +271,55 @@ class App extends React.Component {
   }
 
   render() {
-    console.log("render blockPopUp");
-    console.log(this.state.blockPopUp);
-    console.log("render PopUp");
-    console.log(this.state.popUp);
+    const headerDiv = <div className="header">
+    <h1>Pierre Angot, Compositeur Français</h1>
+    <div className="menu">
+      <p onClick={this.displayHome}>Acceuil</p>
+      <p onClick={this.displayBrowse}>Parcourir les partitions</p>
+      <a href="https://fr.wikipedia.org/wiki/Pierre_Angot" rel="noreferrer" target="_blank" id="wiki">Wikipedia</a>
+      <p onClick={this.displayPrice}>Tarifs et droits d'utilisation</p>
+    </div>
+  </div>
     const pathStyle = this.state.loading ? { color: "red", height: "max-content" } : null;
-    const baseButton = <button onClick={this.baseButtonHandleClick}>Parcourir</button>
-    const reinitButton = <button style={{ width: "100px" }} onClick={this.reinitState}>Réinitialiser</button>
-    const returnButton = <button style={{ width: "100px" }} onClick={this.returnFunc}>Retour</button>
+    const returnButton = <button style={{cursor: 'pointer'}} onClick={this.returnFunc}>Retour</button>
     const displayList = this.state.actualObject.map((item, index) => {
       return (
         <button onClick={() => { this.displayListHandleClick(item.name, item.type, index) }}
           className="displayList"
           index={index} key={item.name}
           typeofbutton={item.type}
+          style={{cursor: 'pointer'}}
         >
           {item.name}
         </button>
       );
     });
-    displayList.unshift(<button style={pathStyle}>{this.state.fullPath}{this.state.loading && "...Chargement du document"}</button>);
-    displayList.unshift(returnButton)
-    const displayDiv = <div className="displayDiv">{reinitButton}{displayList}</div>
+    displayList.unshift(returnButton);
+    const pathToDisplay = "Chemin : " + this.state.fullPath.slice(10);
+    displayList.unshift(<button style={pathStyle}>{pathToDisplay}{this.state.loading && "...Chargement du document"}</button>);    
+    const displayDiv = <div className={isSmatphone ? "displayDivPhone" : "displayDiv"}>{displayList}</div>
+    const fileBrowserHeader = <div className="fileBrowserHeader">
+      <button onClick={this.toggleMenu}>Menu</button>
+      <button onClick={this.displayHome}>Acceuil</button>
+    </div>
+    const searchDiv = <div className={isSmatphone ? "searchDivPhone" : "searchDiv"}>
+    {this.state.displayBrowse && displayDiv}
+  </div>
     return (
       <div>
-        <div className="header">
-          <h1>Pierre Angot, Compositeur Français</h1>
-          <div className="menu">
-            <p onClick={this.displayHome}>Acceuil</p>
-            <p onClick={this.displayBrowse}>Parcourir les partitions</p>
-            <a href="https://fr.wikipedia.org/wiki/Pierre_Angot" rel="noreferrer" target="_blank" id="wiki">Wikipedia</a>
-            <p onClick={this.displayPrice}>Tarifs et droits d'utilisation</p>
-          </div>
-        </div>
+        {isSmatphone ? this.state.displayBrowse ? fileBrowserHeader : headerDiv : headerDiv}
         {this.state.displayBrowse && 
-        <div className="searchAndDisplay">
+        <div className={isSmatphone ? "searchAndDisplayPhone" : "searchAndDisplay"}>
           {this.state.popUp && !this.state.blockPopUp && <PopUp hidePopUp={this.hidePopUp} />}
-          <div className="searchDiv">
-            {this.state.baseButton ? baseButton : null}
-            {!this.state.baseButton && displayDiv}
-          </div>
+          {this.state.displaySearchMenu && searchDiv}
           <PdfDisplayer
-            className="appWrapper"
+            className={isSmatphone ? "appWrapperPhone" : "appWrapper"}
             name={this.state.fileName}
             scale={this.state.scale}
             changeScale={this.changeScale}
             rotate={this.state.rotation}
             changeRotation={this.rotate}
+            displaySearchMenu={this.state.displaySearchMenu}
           />
         </div>}
         {this.state.displayHome &&
@@ -414,7 +439,5 @@ class App extends React.Component {
   }
 
 }
-
-//console.log(files);
 
 export default App;

@@ -1,6 +1,11 @@
+To do:
+-faire une section credit et y coller mes crédit et les crédits pour les icônes
+-faire le css pour afficher proprement tarifs
+-terminer la section tarifs
+-Merge avec le master
+-------------------------------------------------------------------------------------
 bug
--regler le bug du fichier qui reste sur l'affichage d'une page definie quand on le 
-en consulte un autre et qu'on reviens
+
 --------------------------------------------------------------------------------------
 
 feature

@@ -41,6 +41,10 @@ function PdfDisplayer(props) {
   const [numPages, setNumPages] = useState(null);
   const [pageNumber, setPageNumber] = useState(1);
 
+  function clickDownloadPhone() {
+    document.getElementById("download-link").click();
+  }
+
   function onDocumentLoadSuccess({ numPages }) {
     setNumPages(numPages);
     setPageNumber(1);
@@ -57,13 +61,23 @@ function PdfDisplayer(props) {
   function nextPage() {
     changePage(1);
   }
-
   const toDisplay = `${process.env.PUBLIC_URL}${props.name}`;
+  const phoneDownload = isSmatphone ? 
+  <a id="download-link" onClick={clickDownloadPhone} download={toDisplay} href={toDisplay}><p id="phone-download-text">Télécharger</p></a> :
+  <a id="download-link" download={toDisplay} href={toDisplay}>Télécharger</a>
+  const downloadButton = isSmatphone ? <button onClick={clickDownloadPhone} id={isSmatphone ? "download-button-phone" : "download-button"}>
+  {phoneDownload}
+</button>
+  :  
+  <button id={isSmatphone ? "download-button-phone" : "download-button"}>
+  {phoneDownload}
+</button>
   const buttons = <div className={isSmatphone ? "navigationButtonsPhone" : "navigationButtons"}>
-  <p>
+  <p id="page-number">
     Page {pageNumber || (numPages ? 1 : '--')} sur {numPages || '--'}
   </p>
   <button
+    id={isSmatphone ? "previous-button-phone" : "previous-button"}
     type="button"
     disabled={pageNumber <= 1}
     onClick={previousPage}
@@ -71,29 +85,30 @@ function PdfDisplayer(props) {
     {isSmatphone ? null : "Précédent"}
   </button>
   <button
+    id={isSmatphone ? "next-button-phone" : "next-button"}
     type="button"
     disabled={pageNumber >= numPages}
     onClick={nextPage}
   >
     {isSmatphone ? null : "Suivant"}          
   </button>
+  {!isSmatphone &&
   <button onClick={() => { props.changeScale(0.2) }}>
     {isSmatphone ? null : "Agrandir"}     
   </button>
+  }
+  {!isSmatphone &&
   <button onClick={() => { props.changeScale(-0.2) }}>
     {isSmatphone ? null : "Rétrécir"}    
   </button>
-  <button onClick={() => { props.changeRotation() }}>
+  }
+  <button id={isSmatphone ? "rotation-button-phone" : "rotation-button"} onClick={() => { props.changeRotation() }}>
   {isSmatphone ? null : "Rotation"}  
   </button>
-  <button>
-    <a download={toDisplay} href={toDisplay}>
-    {isSmatphone ? null : "Télécharger"}
-    </a>
-  </button>
+  {downloadButton}
 </div>
   return (
-    <div>
+    <div className={isSmatphone ? "appWrapperPhone" : "appWrapper"}>
       <Document
         file={toDisplay}
         onLoadSuccess={onDocumentLoadSuccess}
@@ -122,7 +137,7 @@ class App extends React.Component {
       fullPath: '/sitePdfs/', //building after clicking each new button, i have to implement a return button two
       fileName: '',
       actualObject: [...files[0].contents],
-      scale: isSmatphone ? 0.6 : 1,
+      scale: isSmatphone ? 0.63 : 1,
       displayHome: true,
       displayBrowse: false,
       displayPrice: false,
@@ -209,7 +224,7 @@ class App extends React.Component {
         fileName: `${this.state.fullPath}${name}`,
         loading: true
       });
-      setTimeout(this.endLoading, 3000)
+      setTimeout(this.endLoading, 2200)
     }
     this.scrollToTop();
   }
@@ -218,8 +233,6 @@ class App extends React.Component {
     this.setState({
       blockPopUp: true
     });
-    console.log("hidePopUp");
-    console.log(this.state.hidePopUp);
   }
 
   endLoading() {
@@ -285,7 +298,7 @@ class App extends React.Component {
     const displayList = this.state.actualObject.map((item, index) => {
       return (
         <button onClick={() => { this.displayListHandleClick(item.name, item.type, index) }}
-          className="displayList"
+          className={isSmatphone ? "displayListPhone" : "displayList"}
           index={index} key={item.name}
           typeofbutton={item.type}
           style={{cursor: 'pointer'}}
@@ -313,7 +326,7 @@ class App extends React.Component {
           {this.state.popUp && !this.state.blockPopUp && <PopUp hidePopUp={this.hidePopUp} />}
           {this.state.displaySearchMenu && searchDiv}
           <PdfDisplayer
-            className={isSmatphone ? "appWrapperPhone" : "appWrapper"}
+            id="wrapp"            
             name={this.state.fileName}
             scale={this.state.scale}
             changeScale={this.changeScale}

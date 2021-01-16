@@ -155,18 +155,17 @@ button{
   cursor: pointer;
 }
 
-.appWrapper {
-  position: relative;
-  text-align: center;
-  border-color: black ;
-  border-style: solid;
-  border-width: 10px;
-  height: 90vh;
-  width: 80vw;
-  left: 20vw;
-  background-color: lightgrey;
+.searchAndDisplay{
+  display: flex;
+  padding-top: 12vh;
+  background-color: #E1E1E1;
 }
-
+/*
+.appWrapper{
+  position: fixed;
+  left: 30vh;
+}
+*/
 .navigationButtons{
   display: flex;
   flex-direction: column;
@@ -187,13 +186,6 @@ button{
   font-size: 20px;
 }
 
-.searchAndDisplay{
-  display: flex;
-  flex-direction: row;
-  padding-top: 12vh;
-  background-color: #E1E1E1;
-}
-
 .searchDiv{
   background-color: #E1E1E1;
   height: 1900px;
@@ -211,12 +203,31 @@ button{
   width: 20vw;
 }
 
+.fileBrowserHeader{
+  background-color: white;
+  margin: 0;
+  padding: 0;
+  height: 5vh;
+  width: 100vw;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: stretch;
+}
+
+.fileBrowserHeader > button{
+  height: auto;
+  flex-grow: 0.5;
+  margin: 0;
+  padding: 0;
+}
+
 .searchAndDisplayPhone{
   margin: 0%;
   padding: 0%;
-  height: 100vh;
+  height: auto;
   width: 100vw;
-  background-color: blue;
+  background-color: black;
   
 }
 
@@ -251,27 +262,76 @@ button{
 }
 
 .appWrapperPhone{
+  position: fixed;
   margin: 0%;
   padding: 0%;
-  
+  padding-top: 8vh;
+    
+}
+
+#page-number{
+  position: relative;
+  margin: 0%;
+  padding: 0%;
+  text-align: center;
+  bottom: 2vh;
 }
 
 .displayDivPhone{
   margin: 0%;
   padding: 0%;
-  
+  display: flex;
+  flex-direction: column;
+  width: 100vw;
 }
 
 .navigationButtonsPhone{
   margin: 0%;
-  padding: 0%;
-  
+  padding: 0%; 
+  position: fixed; 
+  top: 87.3vh;
 }
 
 .displayListPhone{
   margin: 0%;
   padding: 0%;
-  
+  width: 100vw;
+}
+
+#previous-button-phone{
+  background-image: url('./icons_pierreangot/back.png');
+  height: 10vh;
+  width: 25vw;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+#next-button-phone{
+  background-image: url('./icons_pierreangot/next.png');
+  height: 10vh;
+  width: 25vw;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+#download-button-phone{
+  background-image: url('./icons_pierreangot/file.png');
+  height: 10vh;
+  width: 25vw;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+#phone-download-text{
+  display: none;
+}
+
+#rotation-button-phone{
+  background-image: url('./icons_pierreangot/rotating-arrow-to-the-right.png');
+  height: 10vh;
+  width: 25vw;
+  background-repeat: no-repeat;
+  background-position: center;
 }
 
 

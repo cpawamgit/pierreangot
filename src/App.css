@@ -274,7 +274,7 @@ button{
     margin: 0%;
     padding: 0%;
     text-align: center;
-    bottom: 20vh;
+    bottom: 12.5vh;
     left: 40vw;
   }
 }
@@ -291,8 +291,8 @@ button{
 .navigationButtonsPhone{
   margin: 0%;
   padding: 0%; 
-  position: fixed; 
-  top: 80vh;
+  position: relative;
+  top: 3vh; 
   display: flex;
   flex-direction: row;
 }

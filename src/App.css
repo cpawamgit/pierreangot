@@ -265,16 +265,17 @@ button{
   position: fixed;
   margin: 0%;
   padding: 0%;
-  padding-top: 8vh;
+  padding-top: 2vh;
     
 }
 @media (max-width: 600px){
   #page-number{
-    position: relative;
+    position: fixed;
     margin: 0%;
     padding: 0%;
     text-align: center;
-    bottom: 2vh;
+    bottom: 20vh;
+    left: 40vw;
   }
 }
 
@@ -291,7 +292,9 @@ button{
   margin: 0%;
   padding: 0%; 
   position: fixed; 
-  top: 75vh;
+  top: 80vh;
+  display: flex;
+  flex-direction: row;
 }
 
 .displayListPhone{

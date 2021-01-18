@@ -1,5 +1,42 @@
 @import url('https://fonts.googleapis.com/css2?family=Courgette&display=swap');
 
+#checker{
+  color: #000000;
+}
+
+.master-div{
+  
+  z-index: 1;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+}
+
+.homeDiv-master{
+  margin-top: 12vh;
+  padding-top: 5vh;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  background-image: url('./sitebackground2.png');
+  background-size: 100% 100%;
+}
+
+@media (max-width: 600px){
+  .homeDiv-master{
+    background-size: 100% 10%;
+  }
+}
+
+.footer{
+  position: relative;
+  height: 12vh;
+  width: 100vw;
+  max-width: 100%;
+  background-color: black;
+  z-index: 3;
+}
+
 ul{
   list-style-type: none;
 }
@@ -13,6 +50,7 @@ body{
   position: absolute;
   text-align: center;
   top: 20vh;
+  left: 40vw;
   z-index: 35;
   background-color: rgb(192, 45, 45);
   width: 20vw;
@@ -24,48 +62,60 @@ body{
   padding-bottom: 4px;
 }
 
+
+/*
 .homeDiv{
-  background-image: url('./sitebackground.png');
+  
   background-size: 100% 100%;
-  height: 110vh;
   width: 98vw;
   opacity: 0.1;
 } 
-
-.priceDiv{
-  background-image: url('./sitebackground.png');
+*/
+.priceMaster{
+  margin-top: 12vh;
+  padding-top: 5vh;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  background-image: url('./sitebackground2.png');
   background-size: 100% 100%;
+}
+/*
+.priceDiv{
+  position: relative;
+  background-image: url('./sitebackground.png');
+  background-size: 100% 50%;
   height: 250vh;
   width: 98vw;
   opacity: 0.1;
 } 
+*/
 
 .homeTextWrapper{
   color: #000000;
-  opacity: 1;
   background-color: transparent;
-  position: absolute;
-  top: 20vh;
+  position: relative;
   width: 80vw;
   left: 10vw;
-  bottom: 40vh;
-  z-index: 1;
   font-family: 'Courgette', cursive;
 }
 
 .priceDivWrapper{
-  text-align: center;
+  position: relative;
+  text-align: left;
   color: #000000;
-  opacity: 1;
   background-color: transparent;
-  position: absolute;
-  top: 20vh;
+  padding-left: 10vw;
   width: 80vw;
-  left: 10vw;
-  bottom: 40vh;
   z-index: 1;
   font-family: 'Courgette', cursive;
-  font-size: 20px;
+  font-size: calc(0.5vh + 1vw);
+}
+
+@media (max-width: 600px){
+  .priceDivWrapper{
+    font-size: calc(1.2vh + 0.75vw);
+  }
 }
 
 .homeTextWrapper > p {
@@ -106,6 +156,12 @@ h2{
   font-size: 28px;
 }
 
+@media (max-width: 600px){
+  h2{
+    font-size: calc(0.9vh + 1.8vw);
+  }
+}
+
 button{
   font-family: 'Courgette', cursive;
   color: #000000;
@@ -124,6 +180,12 @@ button{
   background-color: #000000;
   font-family: 'Courgette', cursive;
   color: #E1E1E1;
+}
+
+@media (max-width: 600px){
+  .header{
+    height: 10vh;
+  }
 }
 
 .menu{
@@ -158,39 +220,48 @@ button{
 .searchAndDisplay{
   display: flex;
   padding-top: 12vh;
-  background-color: #E1E1E1;
+  min-height: 90vh;
+  background-image: url('./sitebackground2.png');
+  background-size: 100% 100%;
 }
-/*
+
 .appWrapper{
-  position: fixed;
-  left: 30vh;
+  position: relative;  
+  left: 20vw;
+  top: 1vh;
 }
-*/
+
 .navigationButtons{
   display: flex;
   flex-direction: column;
   position: fixed;
-  top: 12vh;
-  left: 92vw;
+  left: 92.4vw;
+  bottom: 15vh;
   width: 7.2vw;
-  height: 1900px;
   z-index: 1;
   border-left: 2px solid black;
   border-right: 2px solid black;
-  background-color: #E1E1E1;
+  border-bottom: 2px solid black;
+  border-top: 2px solid black;
+  background-color: transparent;
   font-size: 20px;
+  background-color: #E1E1E1;
 }
 
 .navigationButtons > button{
   height: 10vh;
   font-size: 20px;
+  border: black solid 1px;
+}
+
+.navigationButtons > p{
+  font-size: calc(0.4vh + 0.8vw);
+  padding-left: 0.2vw;
 }
 
 .searchDiv{
   background-color: #E1E1E1;
-  height: 1900px;
   width: 20vw;
-  border-color: #c30000;
   border-right: 2px solid black;
 }
 
@@ -213,6 +284,7 @@ button{
   flex-direction: row;
   justify-content: center;
   align-items: stretch;
+  background-color: black;
 }
 
 .fileBrowserHeader > button{
@@ -220,15 +292,14 @@ button{
   flex-grow: 0.5;
   margin: 0;
   padding: 0;
+  background: radial-gradient(white, white, black);
+  border: black solid 2px;
 }
 
 .searchAndDisplayPhone{
   margin: 0%;
   padding: 0%;
-  height: auto;
   width: 100vw;
-  background-color: black;
-  
 }
 
 .popUpDivPhone{
@@ -262,20 +333,17 @@ button{
 }
 
 .appWrapperPhone{
-  position: fixed;
+  position: relative;
   margin: 0%;
   padding: 0%;
-  padding-top: 2vh;
-    
+  
 }
 @media (max-width: 600px){
   #page-number{
-    position: fixed;
+    position: relative;
     margin: 0%;
     padding: 0%;
     text-align: center;
-    bottom: 12.5vh;
-    left: 40vw;
   }
 }
 
@@ -290,11 +358,12 @@ button{
 
 .navigationButtonsPhone{
   margin: 0%;
-  padding: 0%; 
-  position: relative;
-  top: 3vh; 
+  padding-top: 1vh;
+  position: relative; 
   display: flex;
   flex-direction: row;
+  background-color: black;
+  justify-content: space-around;
 }
 
 .displayListPhone{
@@ -304,27 +373,37 @@ button{
 }
 
 #previous-button-phone{
-  background-image: url('./icons_pierreangot/back.png');
+  background-image: url('./icons_pierreangot/back.png'), radial-gradient(circle, rgba(255, 255, 255, 1), rgba(255, 255, 255, 1), rgba(255, 255, 255, 1), rgba(0, 0, 0, 1));
   height: 10vh;
-  width: 25vw;
+  width: 23vw;
   background-repeat: no-repeat;
   background-position: center;
+  background-color: transparent;
+  border: black solid 2px; 
+  border-radius: 115px;
+  
 }
 
 #next-button-phone{
-  background-image: url('./icons_pierreangot/next.png');
+  background-image: url('./icons_pierreangot/next.png'), radial-gradient(circle, rgba(255, 255, 255, 1), rgba(255, 255, 255, 1), rgba(255, 255, 255, 1), rgba(0, 0, 0, 1));
   height: 10vh;
-  width: 25vw;
+  width: 23vw;
   background-repeat: no-repeat;
   background-position: center;
+  background-color: transparent;
+  border: black solid 2px;
+  border-radius: 115px;
 }
 
 #download-button-phone{
-  background-image: url('./icons_pierreangot/file.png');
+  background-image: url('./icons_pierreangot/file.png'), radial-gradient(circle, rgba(255, 255, 255, 1), rgba(255, 255, 255, 1), rgba(255, 255, 255, 1), rgba(0, 0, 0, 1));
   height: 10vh;
-  width: 25vw;
+  width: 23vw;
   background-repeat: no-repeat;
   background-position: center;
+  background-color: transparent;
+  border: black solid 2px;
+  border-radius: 115px;
 }
 
 #phone-download-text{
@@ -332,11 +411,14 @@ button{
 }
 
 #rotation-button-phone{
-  background-image: url('./icons_pierreangot/rotating-arrow-to-the-right.png');
+  background-image: url('./icons_pierreangot/rotating-arrow-to-the-right.png'), radial-gradient(circle, rgba(255, 255, 255, 1), rgba(255, 255, 255, 1), rgba(255, 255, 255, 1), rgba(0, 0, 0, 1));
   height: 10vh;
-  width: 25vw;
+  width: 23vw;
   background-repeat: no-repeat;
   background-position: center;
+  background-color: transparent;
+  border: black solid 2px;
+  border-radius: 115px;
 }
 
 

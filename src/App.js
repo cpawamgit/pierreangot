@@ -6,6 +6,8 @@ import { pdfjs } from 'react-pdf';
 //import { act } from 'react-dom/test-utils';
 pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.js`;
 
+
+
 const isSmatphone = detectMob();
 
 function detectMob() {
@@ -72,10 +74,11 @@ function PdfDisplayer(props) {
   <button id={isSmatphone ? "download-button-phone" : "download-button"}>
   {phoneDownload}
 </button>
+const pageNumberDisplay = <p id="page-number">
+Page {pageNumber || (numPages ? 1 : '--')} sur {numPages || '--'}
+</p>
   const buttons = <div className={isSmatphone ? "navigationButtonsPhone" : "navigationButtons"}>
-  <p id="page-number">
-    Page {pageNumber || (numPages ? 1 : '--')} sur {numPages || '--'}
-  </p>
+  {!isSmatphone && pageNumberDisplay}
   <button
     id={isSmatphone ? "previous-button-phone" : "previous-button"}
     type="button"
@@ -107,8 +110,9 @@ function PdfDisplayer(props) {
   </button>
   {downloadButton}
 </div>
+const appWrapperStyle = props.rotate === 90 ? {left: 0} : props.rotate === 270 ? {left: 0} : null;
   return (
-    <div className={isSmatphone ? "appWrapperPhone" : "appWrapper"}>
+    <div style={appWrapperStyle} id="appWrapper" className={isSmatphone ? "appWrapperPhone" : "appWrapper"}>
       <Document
         file={toDisplay}
         onLoadSuccess={onDocumentLoadSuccess}
@@ -124,7 +128,9 @@ function PdfDisplayer(props) {
           error=""
         />
       </Document>
+      {isSmatphone ? props.displaySearchMenu ? null : pageNumberDisplay : null}
       {isSmatphone ? props.displaySearchMenu ? null : buttons : buttons}
+      
     </div>
   );
 }
@@ -319,7 +325,7 @@ class App extends React.Component {
     {this.state.displayBrowse && displayDiv}
   </div>
     return (
-      <div>
+      <div className="master-div">
         {isSmatphone ? this.state.displayBrowse ? fileBrowserHeader : headerDiv : headerDiv}
         {this.state.displayBrowse && 
         <div className={isSmatphone ? "searchAndDisplayPhone" : "searchAndDisplay"}>
@@ -336,7 +342,7 @@ class App extends React.Component {
           />
         </div>}
         {this.state.displayHome &&
-          <div>
+          <div className="homeDiv-master">
             <div className="homeDiv"> {/*backgroundDiv*/}
 
             </div>
@@ -367,10 +373,11 @@ class App extends React.Component {
 </p>
 
             </div>
+            
           </div>
         }
         {this.state.displayPrice &&
-          <div>
+          <div className="priceMaster">
             <div className="priceDiv">
               
           </div>
@@ -443,10 +450,12 @@ class App extends React.Component {
                 <li key="3">Ivresse 250€</li>
               </ul>
               <h2><a href="mailto: cyril.morin.tai@gmail.com">Contact : cyril.morin.tai@gmail.com</a></h2>
+              
             </div>
+            
           </div>
         }
-
+        <div className="footer"></div>
       </div>
     );
   }

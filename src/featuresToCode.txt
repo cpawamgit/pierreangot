@@ -2,6 +2,7 @@ To do:
 -faire une section credit et y coller mes crédit et les crédits pour les icônes
 -faire le css pour afficher proprement tarifs
 -terminer la section tarifs
+-faire la traduire en anglais
 -Merge avec le master
 -------------------------------------------------------------------------------------
 bug
@@ -10,6 +11,7 @@ bug
 
 feature
 -ajouter un logo d'onglet
+faire en sorte que le fonction "back" du navigateur remonte l'arborecense au lieu de revenir une page en arrière
 -recherche par matériel
 -recherche par nom de fichiers
 -téléchargement par dossier

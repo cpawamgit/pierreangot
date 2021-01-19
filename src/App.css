@@ -27,11 +27,24 @@
 
 .footer{
   position: relative;
-  height: 12vh;
   width: 100vw;
   max-width: 100%;
   background-color: black;
   z-index: 3;
+  color: white;
+  font-family: 'Courgette', cursive;
+  text-align: center;
+  padding-top: 1vh;
+}
+
+.footer > p > a{
+  color: white;
+}
+
+.footer > h2{
+  padding-top: 0%;
+  margin-top: 0%;
+  font-size: calc(0.75vh + 0.75vw);
 }
 
 ul{
@@ -85,7 +98,7 @@ body{
   display: flex;
   flex-direction: column;
   background-image: url('./sitebackground2.png');
-  background-size: 100% 100%;
+  background-size: 100% 40%;
 }
 /*
 .priceDiv{
@@ -105,6 +118,7 @@ body{
   width: 80vw;
   left: 10vw;
   font-family: 'Courgette', cursive;
+  padding-bottom: 15vh;
 }
 
 
@@ -115,6 +129,7 @@ body{
   color: #000000;
   background-color: transparent;
   padding-left: 10vw;
+  padding-bottom: 15vh;
   width: 80vw;
   z-index: 1;
   font-family: 'Courgette', cursive;
@@ -246,7 +261,7 @@ button{
 
 .appWrapper{
   position: relative;  
-  left: 20vw;
+  left: 18vw;
   top: 1vh;
 }
 
@@ -255,7 +270,7 @@ button{
   flex-direction: column;
   position: fixed;
   left: 92.4vw;
-  bottom: 13vh;
+  bottom: 14vh;
   width: 7.2vw;
   z-index: 1;
   border-left: 2px solid black;
@@ -343,6 +358,7 @@ button{
   position: fixed;
   background-color: rgb(255, 98, 98);
   border: solid black 2px;
+  z-index: 5;
 }
 
 .popUpDivPhone > p{
@@ -364,12 +380,21 @@ button{
 }
 
 .appWrapperPhone{
-  display: block;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
   position: relative;
   margin: 0%;
   padding: 0%;
   min-height: 80vh;
+  background-color: black;
 }
+
+.phoneDocument{
+  margin-left: auto;
+  margin-right: auto;
+}
+
 @media (max-width: 600px){
   #page-number{
     position: relative;
@@ -386,11 +411,13 @@ button{
   display: flex;
   flex-direction: column;
   width: 100vw;
+  background-color: black;
 }
 
 .navigationButtonsPhone{
   margin: 0%;
   padding-top: 1vh;
+  padding-bottom: 2vh;
   position: relative; 
   display: flex;
   flex-direction: row;
@@ -399,41 +426,46 @@ button{
 }
 
 .displayListPhone{
+  position: relative;
   margin: 0%;
   padding: 0%;
-  width: 100vw;
+  margin-left: 1vw;
+  margin-bottom: 0.3vh;
+  width: 98vw;
+  background-color: white;
+  border-radius: 15px;
 }
 
 #previous-button-phone{
-  background-image: url('./icons_pierreangot/back.png'), radial-gradient(circle, rgba(255, 255, 255, 1), rgba(255, 255, 255, 1), rgba(255, 255, 255, 1), rgba(0, 0, 0, 1));
+  background-image: url('./icons_pierreangot/back.png');
+  background-color: white;
   height: 10vh;
   width: 23vw;
   background-repeat: no-repeat;
   background-position: center;
-  background-color: transparent;
   border: black solid 2px; 
   border-radius: 115px;
   
 }
 
 #next-button-phone{
-  background-image: url('./icons_pierreangot/next.png'), radial-gradient(circle, rgba(255, 255, 255, 1), rgba(255, 255, 255, 1), rgba(255, 255, 255, 1), rgba(0, 0, 0, 1));
+  background-image: url('./icons_pierreangot/next.png');
+  background-color: white;
   height: 10vh;
   width: 23vw;
   background-repeat: no-repeat;
   background-position: center;
-  background-color: transparent;
   border: black solid 2px;
   border-radius: 115px;
 }
 
 #download-button-phone{
-  background-image: url('./icons_pierreangot/file.png'), radial-gradient(circle, rgba(255, 255, 255, 1), rgba(255, 255, 255, 1), rgba(255, 255, 255, 1), rgba(0, 0, 0, 1));
+  background-image: url('./icons_pierreangot/file.png');
+  background-color: white;
   height: 10vh;
   width: 23vw;
   background-repeat: no-repeat;
   background-position: center;
-  background-color: transparent;
   border: black solid 2px;
   border-radius: 115px;
 }
@@ -443,17 +475,46 @@ button{
 }
 
 #rotation-button-phone{
-  background-image: url('./icons_pierreangot/rotating-arrow-to-the-right.png'), radial-gradient(circle, rgba(255, 255, 255, 1), rgba(255, 255, 255, 1), rgba(255, 255, 255, 1), rgba(0, 0, 0, 1));
+  background-image: url('./icons_pierreangot/rotating-arrow-to-the-right.png');
+  background-color: white;
   height: 10vh;
   width: 23vw;
   background-repeat: no-repeat;
   background-position: center;
-  background-color: transparent;
   border: black solid 2px;
   border-radius: 115px;
 }
 
+@media (max-width: 600px){
+  .footer > h2{
+    font-size: calc(1vh + 2vw);
+  }
+  .footer > p{
+    font-size: calc(0.75vh + 1.5vw);
+  }
+}
 
+#icon-credit{
+  padding-top: 2vh;
+  font-size: calc(0.5vh + 1vw);
+  text-align: center;
+}
+
+#language{
+  position: fixed;
+  color: white;
+  z-index: 88;
+  width: fit-content;
+  background-color: black;
+  border: none;
+  top: 1vh;
+  left: 1vw;
+  cursor: pointer;
+}
+
+#icon-credit > p >a{
+  color: white;
+}
 /*
 @media (max-width: 600px){
   .header{

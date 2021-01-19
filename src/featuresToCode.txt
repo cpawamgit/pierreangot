@@ -1,7 +1,5 @@
 To do:
 -faire une section credit et y coller mes crédit et les crédits pour les icônes
--faire le css pour afficher proprement tarifs
--terminer la section tarifs
 -faire la traduire en anglais
 -Merge avec le master
 -------------------------------------------------------------------------------------

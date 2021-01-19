@@ -344,7 +344,7 @@ class App extends React.Component {
     </div>
     return (
       <div className="master-div">
-        <button onClick={this.toggleLanguage} id="language">{this.state.language === "Français" ? "English" : "Français"}</button>
+        {this.state.displayHome ? <button onClick={this.toggleLanguage} id="language">{this.state.language === "Français" ? "English" : "Français"}</button> : null}
         {isSmatphone ? this.state.displayBrowse ? fileBrowserHeader : headerDiv : headerDiv}
         {this.state.displayBrowse &&
           <div className={isSmatphone ? "searchAndDisplayPhone" : "searchAndDisplay"}>

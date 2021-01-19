@@ -512,6 +512,14 @@ button{
   cursor: pointer;
 }
 
+@media (max-width: 600px){
+  #language{
+    font-size: calc(0.5vh + 1vw);
+    top: 0;
+    left: 0;
+  }
+}
+
 #icon-credit > p >a{
   color: white;
 }
